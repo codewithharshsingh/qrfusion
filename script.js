@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Configuration & State ---
   const CONFIG = {
     pincodeApiUrl: "https://api.postalpincode.in/pincode/",
-    websiteUrl: "qr-fusion.netlify.app",
-    placeholderData: "https://qr-fusion.netlify.app",
+    websiteUrl: "qrfusion.netlify.app",
+    placeholderData: "https://qrfusion.netlify.app",
   };
 
   if (wifiPasswordInput && toggleWifiPasswordBtn) {
