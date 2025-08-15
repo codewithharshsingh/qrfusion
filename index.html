@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Fusion - Free & Advanced QR Code Generator Online</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/android-chrome-512x512.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-chrome-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="logo">
+        <h1>QR Fusion</h1>
+      </div>
+      <label
+        for="theme-toggle"
+        class="themeToggle st-sunMoonThemeToggleBtn"
+        title="Toggle Theme"
+      >
+        <input type="checkbox" id="theme-toggle" class="themeToggleInput" />
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          stroke="none"
+        >
+          <mask id="moon-mask">
+            <rect x="0" y="0" width="20" height="20" fill="white"></rect>
+            <circle cx="11" cy="3" r="8" fill="black"></circle>
+          </mask>
+          <circle
+            class="sunMoon"
+            cx="10"
+            cy="10"
+            r="8"
+            mask="url(#moon-mask)"
+          ></circle>
+          <g>
+            <circle class="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
+            <circle class="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
+            <circle class="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle>
+            <circle class="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle>
+            <circle class="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle>
+            <circle class="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle>
+          </g>
+        </svg>
+      </label>
+    </header>
+
+    <div class="main-container">
+      <main class="main-content">
+        <div class="left-column">
+          <section class="options-section">
+            <h2 class="section-title">Options</h2>
+            <div class="tabs-container">
+              <button class="tab tab-active" data-tab="text">Text/URL</button>
+              <button class="tab" data-tab="vcard">Contact</button>
+              <button class="tab" data-tab="wifi">Wi-Fi</button>
+              <button class="tab" data-tab="event">Event</button>
+              <button class="tab" data-tab="social">Social</button>
+              <button class="tab" data-tab="appstore">App Store</button>
+              <button class="tab" data-tab="email">Email</button>
+              <button class="tab" data-tab="sms">SMS</button>
+              <button class="tab" data-tab="location">Location</button>
+              <button class="tab" data-tab="payment">Payment</button>
+            </div>
+          </section>
+
+          <div id="form-container-wrapper"></div>
+
+          <section class="customization-section">
+            <div class="section-header section-divider">
+              <h2 class="section-title">Customization</h2>
+              <button id="reset-customization-btn" class="text-button">
+                Reset
+              </button>
+            </div>
+            <div id="customization-controls" class="grid-form">
+              <div>
+                <label for="size-input">Size (px)</label>
+                <input
+                  type="number"
+                  id="size-input"
+                  value="300"
+                  min="100"
+                  max="1000"
+                  step="10"
+                />
+              </div>
+              <div>
+                <label>Colors</label>
+                <div class="color-picker-wrapper">
+                  <div class="color-input-group">
+                    <label for="color-fg">Foreground</label>
+                    <input type="color" id="color-fg" value="#000000" />
+                  </div>
+                  <div class="color-input-group">
+                    <label for="color-bg">Background</label>
+                    <input type="color" id="color-bg" value="#ffffff" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="shape-style">Shape Style</label>
+                <select id="shape-style">
+                  <option value="square">Square</option>
+                  <option value="dots">Dots</option>
+                  <option value="extra-rounded">Rounded</option>
+                </select>
+              </div>
+              <div>
+                <label for="border-style">Frame Style</label>
+                <select id="border-style">
+                  <option value="square">Square</option>
+                  <option value="dot">Round</option>
+                  <option value="extra-rounded">Rounded</option>
+                </select>
+              </div>
+              <div>
+                <label for="center-style">Eye Ball Style</label>
+                <select id="center-style">
+                  <option value="square">Square</option>
+                  <option value="dot">Round</option>
+                </select>
+              </div>
+              <div class="grid-col-span-2">
+                <label for="logo-upload">Add Logo</label>
+                <div class="logo-upload-wrapper">
+                  <input type="file" id="logo-upload" />
+                  <button class="remove-logo-btn" id="remove-logo-btn">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <div class="qr-code-wrapper">
+            <div id="qr-code-placeholder">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 14.625a1.125 1.125 0 011.125-1.125h4.5a1.125 1.125 0 011.125 1.125v4.5a1.125 1.125 0 01-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z"
+                />
+              </svg>
+              <p>Your QR Code will appear here</p>
+            </div>
+            <div id="qr-code-container"></div>
+          </div>
+          <div class="export-controls">
+            <div class="control-group">
+              <p class="export-label">Download As</p>
+              <div class="download-buttons-group">
+                <button id="download-png-btn" class="export-button" disabled>
+                  PNG
+                </button>
+                <button id="download-jpeg-btn" class="export-button" disabled>
+                  JPEG
+                </button>
+                <button id="download-pdf-btn" class="export-button" disabled>
+                  PDF
+                </button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <p class="export-label">Share As</p>
+              <div class="download-buttons-group">
+                <button id="share-png-btn" class="export-button" disabled>
+                  PNG
+                </button>
+                <button id="share-jpeg-btn" class="export-button" disabled>
+                  JPEG
+                </button>
+                <button id="share-pdf-btn" class="export-button" disabled>
+                  PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <template id="forms-template">
+      <div id="text-form" class="form-container">
+        <h3 class="section-subtitle grid-col-span-2">Enter Text or URL</h3>
+        <textarea
+          id="text-input"
+          placeholder="Enter Text or URL (e.g., https://google.com)"
+        ></textarea>
+      </div>
+
+      <div id="vcard-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Contact Information</h3>
+        <input
+          type="text"
+          id="vcard-name"
+          placeholder="Full Name"
+          class="grid-col-span-2"
+        />
+        <input type="text" id="vcard-org" placeholder="Organization" />
+        <input type="text" id="vcard-title" placeholder="Title" />
+        <input type="tel" id="vcard-tel" placeholder="Phone Number" />
+        <input type="email" id="vcard-email" placeholder="Email Address" />
+        <h3 class="section-subtitle grid-col-span-2">Address Details</h3>
+        <input type="text" id="vcard-house" placeholder="House / Flat No." />
+        <input type="text" id="vcard-building" placeholder="Building Name" />
+        <input type="text" id="vcard-street" placeholder="Street / Road" />
+        <input type="text" id="vcard-area" placeholder="Area / Locality" />
+        <input type="text" id="vcard-city" placeholder="City / Town" />
+        <input type="text" id="vcard-state" placeholder="State / Province" />
+        <input type="text" id="vcard-country" placeholder="Country" />
+        <input type="text" id="vcard-postal" placeholder="Postal / ZIP Code" />
+        <div
+          id="vcard-address-status"
+          class="status-text grid-col-span-2"
+        ></div>
+        <h3 class="section-subtitle grid-col-span-2">Additional Information</h3>
+        <input type="text" id="vcard-url" placeholder="Website URL" />
+        <input type="text" id="vcard-map" placeholder="Google Maps Link" />
+        <textarea
+          id="vcard-note"
+          placeholder="Note (e.g., Landmark)"
+          class="grid-col-span-2"
+        ></textarea>
+      </div>
+
+      <div id="wifi-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Wi-Fi Network Details</h3>
+
+        <input
+          type="text"
+          id="wifi-ssid"
+          placeholder="Network Name (SSID)"
+          class="grid-col-span-2"
+        />
+
+        <div class="password-wrapper grid-col-span-2">
+          <input type="password" id="wifi-password" placeholder="Password" />
+          <button
+            type="button"
+            id="toggle-wifi-password"
+            class="toggle-password-btn"
+          >
+            Show
+          </button>
+        </div>
+
+        <select id="wifi-encryption" class="grid-col-span-2">
+          <option value="WPA">WPA/WPA2</option>
+          <option value="WEP">WEP</option>
+          <option value="nopass">No Password</option>
+        </select>
+      </div>
+
+      <div id="event-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Event Details</h3>
+        <input
+          type="text"
+          id="event-title"
+          placeholder="Event Title"
+          class="grid-col-span-2"
+        />
+
+        <div>
+          <input
+            type="text"
+            id="event-start"
+            placeholder="Select Start Date & Time"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            id="event-end"
+            placeholder="Select End Date & Time"
+          />
+        </div>
+
+        <input
+          type="text"
+          id="event-location"
+          placeholder="Location (e.g., Conference Hall)"
+          class="grid-col-span-2"
+        />
+        <textarea
+          id="event-description"
+          placeholder="Description"
+          class="grid-col-span-2"
+        ></textarea>
+      </div>
+
+      <div id="social-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Social Media Details</h3>
+        <select id="social-platform" class="grid-col-span-2">
+          <option value="twitter">Twitter / X</option>
+          <option value="instagram">Instagram</option>
+          <option value="facebook">Facebook</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="tiktok">TikTok</option>
+          <option value="youtube">YouTube</option>
+          <option value="pinterest">Pinterest</option>
+        </select>
+        <input
+          type="text"
+          id="social-handle"
+          placeholder="Enter Username or Handle"
+          class="grid-col-span-2"
+        />
+        <p class="form-note grid-col-span-2">
+          Enter just your username (e.g., "google"), not the full URL.
+        </p>
+      </div>
+
+      <div id="appstore-form" class="form-container">
+        <h3 class="section-subtitle grid-col-span-2">App Store Link</h3>
+        <textarea
+          id="appstore-url"
+          placeholder="Enter full App Store or Google Play URL"
+        ></textarea>
+      </div>
+
+      <div id="email-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Email Details</h3>
+        <input
+          type="email"
+          id="email-to"
+          placeholder="Recipient Email"
+          class="grid-col-span-2"
+        />
+        <input
+          type="text"
+          id="email-subject"
+          placeholder="Subject"
+          class="grid-col-span-2"
+        />
+        <textarea
+          id="email-body"
+          placeholder="Email Body"
+          class="grid-col-span-2"
+        ></textarea>
+      </div>
+
+      <div id="sms-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">SMS Details</h3>
+        <input
+          type="tel"
+          id="sms-to"
+          placeholder="Phone Number"
+          class="grid-col-span-2"
+        />
+        <textarea
+          id="sms-body"
+          placeholder="Message"
+          class="grid-col-span-2"
+        ></textarea>
+      </div>
+
+      <div id="location-form" class="form-container grid-form">
+        <h3 class="section-subtitle grid-col-span-2">Address Details</h3>
+
+        <input type="text" id="loc-house" placeholder="House / Flat No." />
+        <input type="text" id="loc-building" placeholder="Building Name" />
+        <input type="text" id="loc-street" placeholder="Street / Road" />
+        <input type="text" id="loc-area" placeholder="Area / Locality" />
+        <input type="text" id="loc-city" placeholder="City / Town" />
+        <input type="text" id="loc-state" placeholder="State / Province" />
+        <input type="text" id="loc-country" placeholder="Country" />
+        <input type="text" id="loc-postal" placeholder="Postal / ZIP Code" />
+
+        <div id="loc-address-status" class="status-text grid-col-span-2"></div>
+
+        <input
+          type="text"
+          id="loc-additional-info"
+          placeholder="Additional Info (e.g., Landmark)"
+          class="grid-col-span-2"
+        />
+
+        <div id="loc-address-status" class="status-text grid-col-span-2"></div>
+
+        <h3 class="section-subtitle grid-col-span-2">
+          Or provide a direct map link
+        </h3>
+        <input
+          type="text"
+          id="loc-map"
+          placeholder="Google Maps Link"
+          class="grid-col-span-2"
+        />
+      </div>
+
+      <div id="payment-form" class="form-container">
+        <h3 class="section-subtitle grid-col-span-2">Select Payment Method</h3>
+
+        <div class="payment-toggle">
+          <label>
+            <input type="radio" name="payment-type" value="upi" checked />
+            <span>UPI Details</span>
+          </label>
+          <label>
+            <input type="radio" name="payment-type" value="bank" />
+            <span>Bank Account</span>
+          </label>
+        </div>
+        <div id="upi-fields" class="grid-form">
+          <p class="form-note grid-col-span-2">
+            Generates a UPI payment QR code (primarily for India).
+          </p>
+          <input
+            type="text"
+            id="payment-pa"
+            placeholder="UPI ID (e.g., user@bank)"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="payment-pn"
+            placeholder="Payee Name"
+            class="grid-col-span-2"
+          />
+          <input
+            type="number"
+            id="payment-am"
+            placeholder="Amount (optional)"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="payment-tn"
+            placeholder="Transaction Note (optional)"
+            class="grid-col-span-2"
+          />
+        </div>
+        <div id="bank-fields" class="grid-form" style="display: none">
+          <p class="form-note grid-col-span-2">
+            Generates a QR with plain text bank details for manual transfer.
+          </p>
+          <input
+            type="text"
+            id="bank-holder-name"
+            placeholder="Account Holder Name"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="bank-ac-number"
+            placeholder="Account Number / IBAN"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="bank-ac-confirm"
+            placeholder="Confirm Account Number"
+            class="grid-col-span-2"
+          />
+          <div id="bank-ac-status" class="status-text grid-col-span-2"></div>
+          <input
+            type="text"
+            id="bank-name"
+            placeholder="Bank Name"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="bank-branch"
+            placeholder="Branch Name (Optional)"
+            class="grid-col-span-2"
+          />
+          <input
+            type="text"
+            id="bank-ifsc"
+            placeholder="IFSC / SWIFT Code"
+            class="grid-col-span-2"
+          />
+        </div>
+      </div>
+    </template>
+
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="js/dark-bg-data.js"></script>
+    <script src="js/light-bg-data.js"></script>
+    <script src="js/logo-data.js"></script>
+    <!-- Then load your split scripts -->
+    <script src="script.js"></script>
+
+    <script>
+      function setViewportHeight() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `\${vh}px`);
+      }
+      window.addEventListener("resize", setViewportHeight);
+      window.addEventListener("load", setViewportHeight);
+      setViewportHeight();
+    </script>
+  </body>
+</html>

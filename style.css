@@ -1,0 +1,1014 @@
+/* --- CSS VARIABLES (THEME) --- */
+:root {
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* === Light Theme (Default) Variables === */
+  --google-blue: #4285f4;
+  --google-green: #0f9d58;
+  --google-yellow: #f4b400;
+  --google-red: #db4437;
+  --accent-primary: #1a73e8;
+  --accent-primary-hover: #1765cc;
+  --focus-ring-color: #1a73e8;
+  --bg-header: rgba(248, 249, 250, 0.6);
+  --border-header: rgba(0, 0, 0, 0.1);
+  --bg-main: #ffffff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --border-inputs: #dadce0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --secondary-button-bg: #f1f3f4;
+  --secondary-button-text: #3c4043;
+  --secondary-button-bg-hover: #e8eaed;
+  --toggle-bg: #e8eaed;
+  --error-color: #d93025;
+  --icon-color: hsla(240, 87%, 50%, 0.6);
+  --qr-wrapper-bg: rgba(0, 0, 0, 0.02);
+  --primary-button-text: #ffffff;
+  --toggle-active-text: #ffffff;
+  --button-disabled-bg: #e8eaed;
+  --button-disabled-text: #bdc1c6;
+  --active-tab-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+  --export-button-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+  --export-button-shadow-hover: 0 6px 14px -2px rgba(0, 0, 0, 0.3);
+  --border-radius-md: 16px;
+  --border-radius-sm: 8px;
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%235f6368'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 7rem 2rem 2rem 2rem;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  line-height: 1.6;
+  background: linear-gradient(135deg, #e6f0ff 0%, #fde2e6 100%);
+  background-attachment: fixed;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* === DARK THEME OVERRIDES === */
+body.dark-theme {
+  --google-blue: #4285f4;
+  --google-green: #0f9d58;
+  --google-yellow: #f4b400;
+  --google-red: #db4437;
+  --accent-primary: #8ab4f8;
+  --accent-primary-hover: #aecbfa;
+  --bg-header: rgba(32, 33, 36, 0.7);
+  --border-header: rgba(255, 255, 255, 0.15);
+  --bg-main: rgba(32, 33, 36, 0.7);
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --border-inputs: rgba(255, 255, 255, 0.15);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --secondary-button-bg: #343844;
+  --secondary-button-text: var(--text-secondary);
+  --secondary-button-bg-hover: #414550;
+  --toggle-bg: rgba(0, 0, 0, 0.2);
+  --error-color: #f28b82;
+  --icon-color: #e8eaed;
+  --qr-wrapper-bg: rgba(0, 0, 0, 0.2);
+  --primary-button-text: #000000;
+  --toggle-active-text: #ffffff;
+  --button-disabled-bg: rgba(50, 50, 50, 0.5);
+  --button-disabled-text: var(--text-secondary);
+  --active-tab-shadow: 0 5px 12px -2px rgba(0, 0, 0, 0.3);
+  --export-button-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  --export-button-shadow-hover: 0 6px 14px -2px rgba(0, 0, 0, 0.5);
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239aa0a6'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+
+  background-color: #000;
+  background-image: radial-gradient(
+      at 1% 1%,
+      hsla(240, 87%, 50%, 0.3) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 99% 99%, hsla(339, 87%, 50%, 0.3) 0px, transparent 50%);
+}
+
+/* --- HEADER --- */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-header);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-header);
+  transition: background 0.3s, border-bottom 0.3s;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to right,
+    hsla(240, 87%, 50%, 1),
+    hsla(339, 87%, 50%, 1)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- THEME TOGGLE (Sun/Moon) --- */
+.themeToggle {
+  display: block;
+  position: relative;
+  width: 2em;
+  aspect-ratio: 1 / 1;
+  color: var(--icon-color);
+  cursor: pointer;
+}
+
+.themeToggle .themeToggleInput {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.themeToggle svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+  transform: rotate(40deg);
+  pointer-events: none;
+}
+
+.themeToggle svg .sunMoon {
+  transform-origin: center center;
+  transition: inherit;
+}
+
+.themeToggle svg .sunRay {
+  transform-origin: center center;
+  transform: scale(0);
+}
+
+.themeToggle svg mask > circle {
+  transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
+}
+
+.themeToggle .themeToggleInput:checked + svg {
+  transform: rotate(90deg);
+}
+
+.themeToggle .themeToggleInput:checked + svg mask > circle {
+  transform: translate(16px, -3px);
+}
+
+.themeToggle .themeToggleInput:checked + svg .sunMoon {
+  transform: scale(0.55);
+}
+
+.themeToggle .themeToggleInput:checked + svg .sunRay {
+  animation: showRay1832 0.4s ease forwards;
+}
+
+@keyframes showRay1832 {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* --- MAIN LAYOUT --- */
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2.5rem;
+  background: var(--bg-main);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-header);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  transition: background 0.3s, border 0.3s;
+  /* Ensure content doesn't overflow horizontally */
+  overflow-x: hidden;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0rem;
+  /* Ensure grid items don't overflow */
+  overflow: hidden;
+}
+
+.left-column,
+.right-column {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  /* Add min-width: 0 to prevent flex/grid items from overflowing their container */
+  min-width: 0;
+}
+
+.options-section {
+  margin-bottom: 0rem;
+}
+
+.options-section > .section-title {
+  display: none;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* --- TABS --- */
+.tabs-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-inputs);
+}
+
+.tab {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--secondary-button-text);
+  background-color: var(--secondary-button-bg);
+  border: 1px solid var(--border-inputs);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+body.dark-theme .tab {
+  border-color: #4a4d59;
+}
+
+.tab:hover {
+  background-color: var(--secondary-button-bg-hover);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--export-button-shadow-hover);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+body.dark-theme .tab:hover {
+  border-color: #585b66;
+}
+
+.tab.tab-active {
+  color: #fff;
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    hsl(240, 87%, 50%, 0.5),
+    hsl(339, 87%, 50%, 0.5)
+  );
+  border: none;
+  box-shadow: var(--active-tab-shadow);
+  transform: translateY(-2px);
+}
+
+.tab.tab-active:focus {
+  outline: none;
+}
+
+/* --- Forms (Grid and Sub-Headings) --- */
+.form-container {
+  display: block;
+  /* Ensure form containers don't overflow */
+  margin-bottom: 1rem;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+
+.grid-col-span-2 {
+  grid-column: span 2;
+}
+
+/* Find this rule and change margin-top back to 1rem */
+.section-subtitle {
+  grid-column: 1 / -1;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.status-text:empty {
+  display: none;
+}
+
+.status-text {
+  min-height: 1.25em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* --- Status Message Colors --- */
+.status-text.info {
+  color: var(--google-blue); /* Blue for "Fetching..." */
+}
+.status-text.success {
+  color: var(--google-green); /* Green for success */
+}
+.status-text.warning {
+  color: var(--google-yellow); /* Yellow for invalid input */
+}
+.status-text.error {
+  color: var(--google-red); /* Red for network errors */
+}
+
+/* --- Generic Input Fields, Textareas, Selects --- */
+.main-container input:not([type="color"]),
+.main-container textarea,
+.main-container select {
+  width: 100%;
+  min-width: 0; /* Crucial for preventing overflow in flex/grid containers */
+  padding: 0.75rem 1rem;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--secondary-button-bg);
+  border: 1px solid var(--border-inputs);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s;
+  resize: none; /* Disables resizing on all elements by default */
+  /* Add word-wrap and overflow-wrap for text inputs to prevent overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* This new, more specific rule enables vertical resizing ONLY for the textarea */
+.main-container textarea {
+  resize: vertical;
+  min-height: 120px; /* Optional: Sets a good default starting height */
+}
+.main-container textarea:focus,
+.main-container input:not([type="color"]):focus,
+.main-container select:focus {
+  /* Also add select here */
+  outline: none;
+  border-color: var(--focus-ring-color);
+  box-shadow: 0 0 0 2px var(--focus-ring-color);
+}
+
+#text-input {
+  margin-top: 1rem;
+}
+
+#appstore-url {
+  margin: 1rem 0 1rem 0;
+}
+
+/* Scoped Select/Option Styles */
+.main-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 3rem !important;
+  background-image: var(--select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Browser-specific <option> styling is kept separate for compatibility */
+body:not(.dark-theme) .main-container select option {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+body:not(.dark-theme) .main-container select option:checked,
+body:not(.dark-theme) .main-container select option:hover {
+  background: var(--accent-primary);
+  color: #fff;
+}
+body.dark-theme .main-container select option {
+  background: #202124;
+  color: var(--text-primary);
+}
+body.dark-theme .main-container select option:checked,
+body.dark-theme .main-container select option:hover {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+/* --- Specific Input Types --- */
+input[type="file"] {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+input[type="file"]:focus {
+  outline: none;
+  border-color: var(--focus-ring-color);
+  box-shadow: 0 0 0 2px var(--focus-ring-color);
+}
+
+input[type="file"]::file-selector-button {
+  margin: -0.75rem 1rem -0.75rem -1rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid var(--border-inputs);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  color: var(--accent-primary-hover);
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-inputs);
+  background-color: transparent;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* --- Section Layouts & Wrappers --- */
+#customization-controls > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#customization-controls label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.color-picker-wrapper,
+.color-input-group,
+.logo-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.color-input-group {
+  gap: 0.75rem;
+}
+
+/* --- Payment Toggle --- */
+.payment-toggle {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  background-color: var(--toggle-bg);
+  border: 1px solid var(--border-inputs);
+  border-radius: var(--border-radius-sm);
+}
+
+.payment-toggle label {
+  flex: 1;
+  text-align: center;
+}
+
+.payment-toggle input[type="radio"] {
+  display: none;
+}
+
+.payment-toggle span {
+  display: block;
+  padding: 0.5rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-toggle input[type="radio"]:checked + span {
+  color: var(--toggle-active-text);
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    hsl(240, 87%, 50%, 0.5),
+    hsl(339, 87%, 50%, 0.5)
+  );
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Buttons --- */
+.download-button {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-button-text);
+  background-color: var(--accent-primary);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.download-button:hover:not(:disabled) {
+  background-color: var(--accent-primary-hover);
+}
+
+/* --- Unified Disabled Button Style --- */
+.download-button:disabled,
+.remove-logo-btn:disabled {
+  background: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  border: 1px solid var(--border-inputs);
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: none;
+  transform: none;
+}
+
+.remove-logo-btn {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(
+    to right,
+    hsl(240, 87%, 50%, 0.5),
+    hsl(339, 87%, 50%, 0.5)
+  );
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.remove-logo-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--export-button-shadow-hover);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+body.dark-theme .remove-logo-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* --- Right Column & QR Code --- */
+.qr-code-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 1.5rem;
+  background-color: var(--qr-wrapper-bg);
+  border: 1px dashed var(--border-inputs);
+  border-radius: var(--border-radius-md);
+  /* Ensure QR code container doesn't overflow */
+  overflow: hidden;
+}
+
+#qr-code-container {
+  display: none;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: var(--border-radius-sm);
+}
+
+#qr-code-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+#qr-code-placeholder svg {
+  width: 64px;
+  height: 64px;
+}
+
+#qr-code-placeholder p {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.tagline-box {
+  margin-top: -0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* --- Export and Share Controls --- */
+.export-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.export-label {
+  margin: 0.75rem 0 0.75rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.download-buttons-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.export-button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.export-button:disabled {
+  background: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  border: 1px solid var(--border-inputs);
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: none;
+  transform: none;
+}
+
+.export-button:not(:disabled) {
+  color: #ffffff;
+  background: linear-gradient(
+    to right,
+    hsl(240, 87%, 50%, 0.5),
+    hsl(339, 87%, 50%, 0.5)
+  );
+  border: none;
+  box-shadow: var(--export-button-shadow);
+}
+
+.export-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--export-button-shadow-hover);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+/* --- Utility & New Features --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-top: 1px solid var(--border-inputs);
+  border-bottom: 1px solid var(--border-inputs);
+}
+
+.section-header .section-title {
+  margin-bottom: 0;
+}
+
+.text-button {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: none;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+}
+
+.text-button:hover {
+  background-color: var(--secondary-button-bg);
+}
+
+.form-note {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  /* Ensure notes don't overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.error-message {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--error-color);
+}
+
+/* --- Flatpickr Custom Dark Theme (Plugin Specific) --- */
+body.dark-theme .flatpickr-calendar {
+  background: #282a2e;
+  border-color: var(--border-inputs);
+  color: var(--text-primary);
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-theme .flatpickr-months .flatpickr-month,
+body.dark-theme .flatpickr-months .flatpickr-current-month,
+body.dark-theme .flatpickr-weekdays,
+body.dark-theme .flatpickr-weekday {
+  color: var(--text-primary);
+  fill: var(--text-primary);
+}
+
+body.dark-theme .flatpickr-day {
+  color: var(--text-primary);
+}
+body.dark-theme .flatpickr-day:hover,
+body.dark-theme .flatpickr-day:focus {
+  background: #3a3d42;
+  border-color: #3a3d42;
+}
+body.dark-theme .flatpickr-day.today {
+  border-color: var(--accent-primary);
+}
+body.dark-theme .flatpickr-day.selected,
+body.dark-theme .flatpickr-day.startRange,
+body.dark-theme .flatpickr-day.endRange {
+  background: var(--accent-primary);
+  color: #000;
+  border-color: var(--accent-primary);
+}
+body.dark-theme .flatpickr-day.disabled,
+body.dark-theme .flatpickr-day.prevMonthDay,
+body.dark-theme .flatpickr-day.nextMonthDay {
+  color: rgba(232, 234, 237, 0.3);
+}
+
+body.dark-theme .flatpickr-time {
+  border-top-color: var(--border-inputs) !important;
+}
+
+body.dark-theme .flatpickr-time input,
+body.dark-theme .flatpickr-time .flatpickr-am-pm {
+  color: var(--text-primary) !important;
+}
+body.dark-theme .flatpickr-time input:hover,
+body.dark-theme .flatpickr-time .flatpickr-am-pm:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+body.dark-theme .flatpickr-time .flatpickr-time-separator {
+  color: var(--text-secondary) !important;
+}
+
+body.dark-theme .flatpickr-monthDropdown-months {
+  background-color: #282a2e !important;
+}
+body.dark-theme .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+  color: var(--text-primary) !important;
+}
+body.dark-theme
+  .flatpickr-monthDropdown-months
+  .flatpickr-monthDropdown-month:hover {
+  background-color: var(--accent-primary) !important;
+  color: #000 !important;
+}
+
+/*
+==============================================
+RESPONSIVE STYLES
+==============================================
+*/
+
+/* --- TABLETS AND SMALLER DESKTOPS (<= 900px) --- */
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .main-container {
+    padding: 2rem;
+  }
+  body {
+    padding: 6rem 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+/* --- MOBILE DEVICES (<= 600px) --- */
+@media (max-width: 600px) {
+  body {
+    padding: 5.5rem 1rem 1rem 1rem;
+    font-size: 0.95rem; /* Slightly smaller base font */
+    background-attachment: scroll; /* Fix for mobile keyboard issue */
+  }
+
+  .app-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo h1 {
+    font-size: 1.25rem;
+  }
+
+  .main-container {
+    padding: 1.5rem;
+  }
+
+  .main-content {
+    gap: 1.5rem;
+  }
+
+  .left-column,
+  .right-column {
+    padding: 0.5rem;
+  }
+
+  .grid-form {
+    grid-template-columns: 1fr; /* Stack form fields vertically */
+    gap: 1.25rem;
+  }
+
+  .grid-col-span-2 {
+    grid-column: span 1; /* Reset column span */
+  }
+
+  .logo-upload-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .download-buttons-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- EXTRA SMALL MOBILE DEVICES (<= 400px) --- */
+@media (max-width: 400px) {
+  body {
+    padding-top: 5rem;
+    font-size: 0.9rem; /* Further reduce font size */
+  }
+
+  .main-container {
+    padding: 1.25rem; /* Reduce container padding */
+  }
+
+  /* This new, more specific rule enables vertical resizing ONLY for the textarea */
+  .main-container textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .main-container input:not([type="color"]),
+  .main-container textarea,
+  .main-container select {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    font-size: 0.9rem;
+  }
+  /* If buttons are still too wide */
+  .export-button,
+  .download-button,
+  .remove-logo-btn {
+    padding: 0.6rem; /* Reduce button padding */
+    font-size: 0.9rem; /* Reduce button font size */
+  }
+  .logo h1 {
+    font-size: 1.25rem; /* Make header logo slightly smaller */
+  }
+
+  .tab {
+    padding: 0.4rem 1rem; /* Adjust tab padding */
+  }
+}
+
+/* --- Custom Foreground Picker Styles --- */
+.foreground-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  padding: 0;
+  position: relative;
+}
+
+.swatch.active-swatch {
+  border-color: var(--focus-ring-color);
+}
+
+#gradient-swatch-btn {
+  background: linear-gradient(to right, #1022e0, #e0106a);
+}
+
+#solid-swatch-container {
+  background-color: var(--border-inputs);
+  overflow: hidden; /* Hides the ugly parts of the color input */
+}
+
+#solid-swatch-container input[type="color"] {
+  width: 150%; /* Makes the color input big enough to fill the circle */
+  height: 150%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  cursor: pointer;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--accent-primary); /* Google Blue */
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.toggle-password-btn:hover {
+  color: var(--accent-primary-hover);
+}
