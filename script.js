@@ -392,24 +392,20 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
       doc.addImage(pageBgImage, "PNG", 0, 0, pageWidth, pageHeight);
 
-      const margin = 10; // Reduced overall margin
+      const margin = 10;
       const logoSize = 30;
-      const textX = margin + logoSize;
-      const logoY = margin - 3; // Slightly closer to the top
+      const textX = margin + logoSize + 5; // Added +5 for better spacing
+      const logoY = margin - 3;
 
-      // Calculate the vertical center of the logo
       const logoCenterY = logoY + logoSize / 2;
 
-      // Add the logo
       doc.addImage(logoBase64, "PNG", margin, logoY, logoSize, logoSize);
 
-      // Add the title (positioned relative to the logo's center)
       doc.setFontSize(24);
       doc.setFont("helvetica", "bold");
       doc.setTextColor(headerTextColor);
       doc.text("QR Fusion", textX, logoCenterY - 2);
 
-      // Add the tagline (also relative to the logo's center)
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(taglineTextColor);
@@ -440,14 +436,30 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
       );
       doc.addImage(dataUrl, "PNG", qrX, qrY, qrSizeMM, qrSizeMM);
 
+      // --- Updated Clickable Footer Section ---
       doc.setFontSize(11);
       doc.setTextColor(footerTextColor);
-      doc.text(
-        `Powered by QR Fusion – Create yours at ${CONFIG.websiteUrl}`,
-        pageWidth / 2,
-        pageHeight - 15,
-        { align: "center" }
+
+      const plainText = "Powered by QR Fusion – Create yours at ";
+      const linkText = CONFIG.websiteUrl;
+      const fullUrl = `https://${CONFIG.websiteUrl}`;
+
+      const textWidth =
+        (doc.getStringUnitWidth(plainText + linkText) * doc.getFontSize()) /
+        doc.internal.scaleFactor;
+      const textXFooter = (pageWidth - textWidth) / 2;
+      const textYFooter = pageHeight - 15;
+
+      doc.text(plainText, textXFooter, textYFooter);
+      doc.textWithLink(
+        linkText,
+        textXFooter +
+          (doc.getStringUnitWidth(plainText) * doc.getFontSize()) /
+            doc.internal.scaleFactor,
+        textYFooter,
+        { url: fullUrl }
       );
+      // --- End of Footer Section ---
 
       doc.save("qr-fusion-code.pdf");
     } catch (error) {
