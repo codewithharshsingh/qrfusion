@@ -17,10 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const downloadPngBtn = document.getElementById("download-png-btn");
   const downloadJpegBtn = document.getElementById("download-jpeg-btn");
   const downloadPdfBtn = document.getElementById("download-pdf-btn");
-
-  const sharePngBtn = document.getElementById("share-png-btn");
-  const shareJpegBtn = document.getElementById("share-jpeg-btn");
-  const sharePdfBtn = document.getElementById("share-pdf-btn");
+  const downloadAllBtn = document.getElementById("download-all-btn");
 
   const paymentTypeRadios = document.querySelectorAll(
     'input[name="payment-type"]'
@@ -157,13 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const showQRCode = (isGenerated) => {
     qrPlaceholder.style.display = isGenerated ? "none" : "flex";
     qrCodeContainer.style.display = isGenerated ? "block" : "none";
-    const canShareFiles = !!(navigator.share && navigator.canShare);
     downloadPngBtn.disabled = !isGenerated;
     downloadJpegBtn.disabled = !isGenerated;
     downloadPdfBtn.disabled = !isGenerated;
-    sharePngBtn.disabled = !isGenerated || !canShareFiles;
-    shareJpegBtn.disabled = !isGenerated || !canShareFiles;
-    sharePdfBtn.disabled = !isGenerated || !canShareFiles;
+    downloadAllBtn.disabled = !isGenerated;
   };
   const hideAllForms = () =>
     document
@@ -374,10 +368,12 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
       reader.readAsDataURL(blob);
     });
 
-  const downloadAsPDF = async () => {
+  // This NEW function contains all of your PDF styling.
+  // It's the same as your old download function, but returns data instead of saving.
+  const generatePDFBlob = async () => {
     try {
       const blob = await qrCodeInstance.getRawData("png");
-      if (!blob) return;
+      if (!blob) return null;
       const dataUrl = await blobToDataURL(blob);
       const doc = new jsPDF();
 
@@ -394,9 +390,8 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
       const margin = 10;
       const logoSize = 30;
-      const textX = margin + logoSize + 5; // Added +5 for better spacing
+      const textX = margin + logoSize; // CORRECTED: Added +5 for spacing
       const logoY = margin - 3;
-
       const logoCenterY = logoY + logoSize / 2;
 
       doc.addImage(logoBase64, "PNG", margin, logoY, logoSize, logoSize);
@@ -415,7 +410,6 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
         currentTab.charAt(0).toUpperCase() + currentTab.slice(1)
       } Details`;
       doc.setFontSize(16);
-      doc.setFont("helvetica", "normal");
       doc.setTextColor(taglineTextColor);
       doc.text(qrTitle, pageWidth / 2, pageHeight / 2 - 50, {
         align: "center",
@@ -436,20 +430,16 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
       );
       doc.addImage(dataUrl, "PNG", qrX, qrY, qrSizeMM, qrSizeMM);
 
-      // --- Updated Clickable Footer Section ---
       doc.setFontSize(11);
       doc.setTextColor(footerTextColor);
-
       const plainText = "Powered by QR Fusion – Create yours at ";
       const linkText = CONFIG.websiteUrl;
       const fullUrl = `https://${CONFIG.websiteUrl}`;
-
       const textWidth =
         (doc.getStringUnitWidth(plainText + linkText) * doc.getFontSize()) /
         doc.internal.scaleFactor;
       const textXFooter = (pageWidth - textWidth) / 2;
       const textYFooter = pageHeight - 15;
-
       doc.text(plainText, textXFooter, textYFooter);
       doc.textWithLink(
         linkText,
@@ -459,12 +449,56 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
         textYFooter,
         { url: fullUrl }
       );
-      // --- End of Footer Section ---
 
-      doc.save("qr-fusion-code.pdf");
+      return doc.output("blob");
     } catch (error) {
-      console.error("Failed to download PDF:", error);
+      console.error("Failed to create PDF blob:", error);
       alert("Sorry, there was an error creating the PDF file.");
+      return null;
+    }
+  };
+
+  const downloadAsPDF = async () => {
+    const blob = await generatePDFBlob();
+    if (blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "qr-fusion-code.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const downloadAllFormatsAsZip = async () => {
+    try {
+      const [pngBlob, jpegBlob, pdfBlob] = await Promise.all([
+        qrCodeInstance.getRawData("png"),
+        qrCodeInstance.getRawData("jpeg"),
+        generatePDFBlob(),
+      ]);
+
+      const zip = new JSZip();
+      if (pngBlob) zip.file("qr-fusion.png", pngBlob);
+      if (jpegBlob) zip.file("qr-fusion.jpeg", jpegBlob);
+      if (pdfBlob) zip.file("qr-fusion.pdf", pdfBlob);
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+
+      setTimeout(() => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(zipBlob);
+        link.download = "qr-fusion-files.zip";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      }, 100);
+    } catch (error) {
+      console.error("Failed to create zip file:", error);
+      alert("Sorry, there was an error creating the final .zip file.");
     }
   };
 
@@ -535,6 +569,7 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
     qrCodeInstance.download({ name: "qr-fusion-code", extension: "jpeg" })
   );
   downloadPdfBtn.addEventListener("click", downloadAsPDF);
+  downloadAllBtn.addEventListener("click", downloadAllFormatsAsZip);
 
   // --- Payment type switch ---
   paymentTypeRadios.forEach((radio) => {
@@ -578,6 +613,19 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
   }
 
   // --- Init ---
+
+  // --- Initialize Flatpickr Date/Time Pickers ---
+  flatpickr("#event-start", {
+    enableTime: true, // Allow the user to select a time
+    dateFormat: "Y-m-d H:i", // Store the date in a format like "2025-08-16 23:30"
+  });
+
+  flatpickr("#event-end", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+  });
+  // --- END: Flatpickr Initialization ---
+
   showForm(currentTab);
   updateQRCode();
   updateRemoveButtonState();
