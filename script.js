@@ -45,6 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const wifiPasswordInput = document.getElementById("wifi-password");
   const toggleWifiPasswordBtn = document.getElementById("toggle-wifi-password");
 
+  // --- Flatpickr Initialization for Event Dates ---
+  flatpickr("#event-start", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    allowInput: true, // Keeps placeholder visible
+  });
+
+  flatpickr("#event-end", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    allowInput: true,
+  });
+
   // --- Configuration & State ---
   const CONFIG = {
     pincodeApiUrl: "https://api.postalpincode.in/pincode/",

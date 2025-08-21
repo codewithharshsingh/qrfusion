@@ -908,29 +908,6 @@ RESPONSIVE STYLES
   .download-buttons-group {
     grid-template-columns: 1fr;
   }
-
-  /*
-==============================================
-MOBILE FIX & IMPROVEMENT FOR DATE PICKERS
-==============================================
-*/
-
-  /* 1. Makes the placeholder text visible on mobile */
-  #event-start::placeholder,
-  #event-end::placeholder {
-    color: var(--text-secondary);
-    opacity: 1; /* Ensures placeholder is not transparent */
-  }
-
-  /* 2. Restores the main text color and adds a calendar icon */
-  #event-start,
-  #event-end {
-    color: var(--text-primary);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239aa0a6'%3E%3Cpath fill-rule='evenodd' d='M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5a.75.75 0 01.75-.75h10a.75.75 0 010 1.5h-10a.75.75 0 01-.75-.75z' clip-rule='evenodd'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1.2em;
-  }
 }
 
 /* --- EXTRA SMALL MOBILE DEVICES (<= 400px) --- */
@@ -974,29 +951,6 @@ MOBILE FIX & IMPROVEMENT FOR DATE PICKERS
 
   .tab {
     padding: 0.4rem 1rem; /* Adjust tab padding */
-  }
-
-  /*
-==============================================
-MOBILE FIX & IMPROVEMENT FOR DATE PICKERS
-==============================================
-*/
-
-  /* 1. Makes the placeholder text visible on mobile */
-  #event-start::placeholder,
-  #event-end::placeholder {
-    color: var(--text-secondary);
-    opacity: 1; /* Ensures placeholder is not transparent */
-  }
-
-  /* 2. Restores the main text color and adds a calendar icon */
-  #event-start,
-  #event-end {
-    color: var(--text-primary);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239aa0a6'%3E%3Cpath fill-rule='evenodd' d='M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5a.75.75 0 01.75-.75h10a.75.75 0 010 1.5h-10a.75.75 0 01-.75-.75z' clip-rule='evenodd'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1.2em;
   }
 }
 
@@ -1063,25 +1017,26 @@ MOBILE FIX & IMPROVEMENT FOR DATE PICKERS
   color: var(--accent-primary-hover);
 }
 
-/*
-==============================================
-MOBILE FIX & IMPROVEMENT FOR DATE PICKERS
-==============================================
-*/
-
-/* 1. Makes the placeholder text visible on mobile */
-#event-start::placeholder,
-#event-end::placeholder {
-  color: var(--text-secondary);
-  opacity: 1; /* Ensures placeholder is not transparent */
+/* --- Date Picker Wrapper --- */
+.date-picker-wrapper {
+  position: relative;
 }
 
-/* 2. Restores the main text color and adds a calendar icon */
-#event-start,
-#event-end {
-  color: var(--text-primary);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239aa0a6'%3E%3Cpath fill-rule='evenodd' d='M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5a.75.75 0 01.75-.75h10a.75.75 0 010 1.5h-10a.75.75 0 01-.75-.75z' clip-rule='evenodd'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.2em;
+.date-picker-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem; /* make space for icon */
+}
+
+.date-picker-wrapper .calendar-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none; /* so clicks still open picker */
+}
+
+.date-picker-wrapper .calendar-icon {
+  color: var(--text-secondary);
+  opacity: 0.25;
 }
