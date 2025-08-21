@@ -46,26 +46,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleWifiPasswordBtn = document.getElementById("toggle-wifi-password");
 
   // --- Flatpickr Initialization for Event Dates ---
-  // --- Flatpickr initialization ---
-  if (window.flatpickr) {
-    flatpickr("#event-start", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i",
-      altInput: true,
-      altFormat: "F j, Y h:i K",
-      allowInput: true,
-    });
+  // Event Start
+  flatpickr("#event-start", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i", // actual value format (for QR code)
+    altInput: true, // create a user-friendly field
+    altFormat: "F j, Y h:i K", // display format (e.g., August 21, 2025 08:58 PM)
+    allowInput: true,
+    onReady: (selectedDates, dateStr, instance) => {
+      instance.altInput.setAttribute("placeholder", "Select Start Date & Time");
+    },
+  });
 
-    flatpickr("#event-end", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i",
-      altInput: true,
-      altFormat: "F j, Y h:i K",
-      allowInput: true,
-    });
-  } else {
-    console.warn("Flatpickr not loaded");
-  }
+  // Event End
+  flatpickr("#event-end", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    altInput: true,
+    altFormat: "F j, Y h:i K",
+    allowInput: true,
+    onReady: (selectedDates, dateStr, instance) => {
+      instance.altInput.setAttribute("placeholder", "Select End Date & Time");
+    },
+  });
 
   // --- Configuration & State ---
   const CONFIG = {
