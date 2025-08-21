@@ -773,79 +773,9 @@ body.dark-theme .remove-logo-btn:hover {
   color: var(--error-color);
 }
 
-/* --- Flatpickr Custom Dark Theme (Plugin Specific) --- */
-body.dark-theme .flatpickr-calendar {
-  background: #282a2e;
-  border-color: var(--border-inputs);
-  color: var(--text-primary);
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.35);
-}
-
-body.dark-theme .flatpickr-months .flatpickr-month,
-body.dark-theme .flatpickr-months .flatpickr-current-month,
-body.dark-theme .flatpickr-weekdays,
-body.dark-theme .flatpickr-weekday {
-  color: var(--text-primary);
-  fill: var(--text-primary);
-}
-
-body.dark-theme .flatpickr-day {
-  color: var(--text-primary);
-}
-body.dark-theme .flatpickr-day:hover,
-body.dark-theme .flatpickr-day:focus {
-  background: #3a3d42;
-  border-color: #3a3d42;
-}
-body.dark-theme .flatpickr-day.today {
-  border-color: var(--accent-primary);
-}
-body.dark-theme .flatpickr-day.selected,
-body.dark-theme .flatpickr-day.startRange,
-body.dark-theme .flatpickr-day.endRange {
-  background: var(--accent-primary);
-  color: #000;
-  border-color: var(--accent-primary);
-}
-body.dark-theme .flatpickr-day.disabled,
-body.dark-theme .flatpickr-day.prevMonthDay,
-body.dark-theme .flatpickr-day.nextMonthDay {
-  color: rgba(232, 234, 237, 0.3);
-}
-
-body.dark-theme .flatpickr-time {
-  border-top-color: var(--border-inputs) !important;
-}
-
-body.dark-theme .flatpickr-time input,
-body.dark-theme .flatpickr-time .flatpickr-am-pm {
-  color: var(--text-primary) !important;
-}
-body.dark-theme .flatpickr-time input:hover,
-body.dark-theme .flatpickr-time .flatpickr-am-pm:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-}
-body.dark-theme .flatpickr-time .flatpickr-time-separator {
-  color: var(--text-secondary) !important;
-}
-
-body.dark-theme .flatpickr-monthDropdown-months {
-  background-color: #282a2e !important;
-}
-body.dark-theme .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
-  color: var(--text-primary) !important;
-}
-body.dark-theme
-  .flatpickr-monthDropdown-months
-  .flatpickr-monthDropdown-month:hover {
-  background-color: var(--accent-primary) !important;
-  color: #000 !important;
-}
-
-/*
-==============================================
+/* ==============================================
 RESPONSIVE STYLES
-==============================================
+============================================== 
 */
 
 /* --- TABLETS AND SMALLER DESKTOPS (<= 900px) --- */
@@ -1018,35 +948,72 @@ RESPONSIVE STYLES
 }
 
 /* --- Date Picker Wrapper --- */
-.date-picker-wrapper {
-  position: relative;
-}
-
-.date-picker-wrapper input {
+/* Base style for event date-time inputs */
+#event-start,
+#event-end {
   width: 100%;
-  padding-right: 2.5rem; /* make space for icon */
-}
-
-.date-picker-wrapper .calendar-icon {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  padding: 10px 12px;
   font-size: 1rem;
-  pointer-events: none; /* so clicks still open picker */
+  border-radius: 8px;
+  background-color: var(--secondary-button-bg);
+  color: var(--text-primary, #000);
 }
 
-#event-start::placeholder,
-#event-end::placeholder {
-  opacity: 1; /* ensure full visibility if ever used */
+/* Align with other inputs */
+.date-picker-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.flatpickr-input::placeholder {
-  color: var(--text-secondary) !important;
-  opacity: 1 !important; /* make sure it's visible on mobile */
-}
-
-.flatpickr-input::placeholder {
+.date-picker-wrapper label {
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  opacity: 0.8; /* adjust to match your design */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Style Chrome’s calendar/clock icons */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(50%) sepia(20%) saturate(200%) hue-rotate(180deg);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.input-hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Force text color inside datetime-local inputs */
+input[type="datetime-local"] {
+  color: var(--text-primary); /* or white, #fff */
+}
+
+/* Style the placeholder (works in most modern browsers) */
+input[type="datetime-local"]::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6; /* adjust brightness */
+}
+
+/* Force the inner text (date & time value) */
+input[type="datetime-local"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper,
+input[type="datetime-local"]::-webkit-datetime-edit-text,
+input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field,
+input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
+  color: var(--text-secondary); /* match your placeholder color */
+  opacity: 0.9;
 }

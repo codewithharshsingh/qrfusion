@@ -27,11 +27,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -307,25 +302,15 @@
         />
 
         <div class="date-picker-wrapper">
-          <input
-            type="text"
-            id="event-start"
-            placeholder="Select Start Date & Time"
-          />
-          <span class="calendar-icon"
-            ><i class="fa-solid fa-calendar"></i
-          ></span>
+          <label for="event-start">Start Date & Time</label>
+          <input id="event-start" type="datetime-local" required step="60" />
+          <small class="input-hint">Format: MM/DD/YYYY HH:MM</small>
         </div>
 
         <div class="date-picker-wrapper">
-          <input
-            type="text"
-            id="event-end"
-            placeholder="Select End Date & Time"
-          />
-          <span class="calendar-icon"
-            ><i class="fa-solid fa-calendar"></i
-          ></span>
+          <label for="event-end">End Date & Time</label>
+          <input id="event-end" type="datetime-local" required step="60" />
+          <small class="input-hint">Format: MM/DD/YYYY HH:MM</small>
         </div>
 
         <input
@@ -529,7 +514,6 @@
     </template>
 
     <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 

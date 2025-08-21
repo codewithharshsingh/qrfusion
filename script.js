@@ -45,49 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const wifiPasswordInput = document.getElementById("wifi-password");
   const toggleWifiPasswordBtn = document.getElementById("toggle-wifi-password");
 
-  // --- Flatpickr Initialization for Event Dates ---
-  flatpickr("#event-start", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    altInput: true,
-    altFormat: "F j, Y h:i K",
-    allowInput: true,
-    defaultDate: null,
-    onReady: (selectedDates, dateStr, instance) => {
-      if (instance.altInput && !dateStr) {
-        instance.altInput.placeholder = "Select Start Date & Time";
-        instance.altInput.value = ""; // clear Chrome’s auto text
-      }
-    },
-    onChange: (selectedDates, dateStr, instance) => {
-      if (!dateStr && instance.altInput) {
-        instance.altInput.placeholder = "Select Start Date & Time";
-        instance.altInput.value = "";
-      }
-    },
-  });
-
-  flatpickr("#event-end", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    altInput: true,
-    altFormat: "F j, Y h:i K",
-    allowInput: true,
-    defaultDate: null,
-    onReady: (selectedDates, dateStr, instance) => {
-      if (instance.altInput && !dateStr) {
-        instance.altInput.placeholder = "Select End Date & Time";
-        instance.altInput.value = "";
-      }
-    },
-    onChange: (selectedDates, dateStr, instance) => {
-      if (!dateStr && instance.altInput) {
-        instance.altInput.placeholder = "Select End Date & Time";
-        instance.altInput.value = "";
-      }
-    },
-  });
-
   // --- Configuration & State ---
   const CONFIG = {
     pincodeApiUrl: "https://api.postalpincode.in/pincode/",
@@ -256,14 +213,39 @@ END:VCARD`;
         const title = getInputValue("event-title");
         const start = getInputValue("event-start");
         if (!title || !start) return "";
-        return `BEGIN:VEVENT
+
+        const end = getInputValue("event-end");
+        const location = getInputValue("event-location");
+        const description = getInputValue("event-description");
+
+        // Convert datetime-local → ICS format (local time, no Z)
+        function toICSLocal(dt) {
+          if (!dt) return "";
+          const date = new Date(dt);
+          const pad = (n) => String(n).padStart(2, "0");
+          return (
+            date.getFullYear() +
+            pad(date.getMonth() + 1) +
+            pad(date.getDate()) +
+            "T" +
+            pad(date.getHours()) +
+            pad(date.getMinutes()) +
+            pad(date.getSeconds())
+          );
+        }
+
+        return `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
 SUMMARY:${title}
-DTSTART:${start.replace(/[-: ]/g, "")}
-DTEND:${getInputValue("event-end").replace(/[-: ]/g, "")}
-LOCATION:${getInputValue("event-location")}
-DESCRIPTION:${getInputValue("event-description")}
-END:VEVENT`;
+DTSTART:${toICSLocal(start)}
+${end ? `DTEND:${toICSLocal(end)}` : ""}
+${location ? `LOCATION:${location}` : ""}
+${description ? `DESCRIPTION:${description}` : ""}
+END:VEVENT
+END:VCALENDAR`;
       }
+
       case "social": {
         const handle = getInputValue("social-handle");
         if (!handle) return "";
