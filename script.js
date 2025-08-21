@@ -46,21 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleWifiPasswordBtn = document.getElementById("toggle-wifi-password");
 
   // --- Flatpickr Initialization for Event Dates ---
-  flatpickr("#event-start", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i", // actual format
-    altInput: true,
-    altFormat: "F j, Y h:i K", // display format
-    allowInput: true,
-  });
+  // --- Flatpickr initialization ---
+  if (window.flatpickr) {
+    flatpickr("#event-start", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      altInput: true,
+      altFormat: "F j, Y h:i K",
+      allowInput: true,
+    });
 
-  flatpickr("#event-end", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    altInput: true,
-    altFormat: "F j, Y h:i K",
-    allowInput: true,
-  });
+    flatpickr("#event-end", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      altInput: true,
+      altFormat: "F j, Y h:i K",
+      allowInput: true,
+    });
+  } else {
+    console.warn("Flatpickr not loaded");
+  }
 
   // --- Configuration & State ---
   const CONFIG = {
