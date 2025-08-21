@@ -1038,13 +1038,12 @@ RESPONSIVE STYLES
 
 #event-start::placeholder,
 #event-end::placeholder {
-  color: var(--text-secondary);
-  opacity: 0.25;
+  opacity: 1; /* ensure full visibility if ever used */
 }
 
-.date-picker-wrapper .calendar-icon {
-  color: var(--text-secondary);
-  opacity: 0.25;
+.flatpickr-input::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 1 !important; /* make sure it's visible on mobile */
 }
 
 .flatpickr-input::placeholder {

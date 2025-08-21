@@ -46,22 +46,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleWifiPasswordBtn = document.getElementById("toggle-wifi-password");
 
   // --- Flatpickr Initialization for Event Dates ---
-  // Event Start
   flatpickr("#event-start", {
     enableTime: true,
-    dateFormat: "Y-m-d H:i", // actual value
-    altInput: true, // use custom input
-    altFormat: "F j, Y h:i K", // user-friendly format
+    dateFormat: "Y-m-d H:i",
+    altInput: true,
+    altFormat: "F j, Y h:i K",
     allowInput: true,
     defaultDate: null,
     onReady: (selectedDates, dateStr, instance) => {
-      if (instance.altInput) {
-        instance.altInput.placeholder = "Select Start Date & Time"; // force placeholder
+      if (instance.altInput && !dateStr) {
+        instance.altInput.placeholder = "Select Start Date & Time";
+        instance.altInput.value = ""; // clear Chrome’s auto text
+      }
+    },
+    onChange: (selectedDates, dateStr, instance) => {
+      if (!dateStr && instance.altInput) {
+        instance.altInput.placeholder = "Select Start Date & Time";
+        instance.altInput.value = "";
       }
     },
   });
 
-  // Event End
   flatpickr("#event-end", {
     enableTime: true,
     dateFormat: "Y-m-d H:i",
@@ -70,8 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
     allowInput: true,
     defaultDate: null,
     onReady: (selectedDates, dateStr, instance) => {
-      if (instance.altInput) {
+      if (instance.altInput && !dateStr) {
         instance.altInput.placeholder = "Select End Date & Time";
+        instance.altInput.value = "";
+      }
+    },
+    onChange: (selectedDates, dateStr, instance) => {
+      if (!dateStr && instance.altInput) {
+        instance.altInput.placeholder = "Select End Date & Time";
+        instance.altInput.value = "";
       }
     },
   });
