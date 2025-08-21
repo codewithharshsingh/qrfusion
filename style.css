@@ -1036,6 +1036,12 @@ RESPONSIVE STYLES
   pointer-events: none; /* so clicks still open picker */
 }
 
+#event-start::placeholder,
+#event-end::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.25;
+}
+
 .date-picker-wrapper .calendar-icon {
   color: var(--text-secondary);
   opacity: 0.25;
