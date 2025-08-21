@@ -645,18 +645,6 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
   // --- Init ---
 
-  // --- Initialize Flatpickr Date/Time Pickers ---
-  flatpickr("#event-start", {
-    enableTime: true, // Allow the user to select a time
-    dateFormat: "Y-m-d H:i", // Store the date in a format like "2025-08-16 23:30"
-  });
-
-  flatpickr("#event-end", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-  });
-  // --- END: Flatpickr Initialization ---
-
   showForm(currentTab);
   updateQRCode();
   updateRemoveButtonState();
