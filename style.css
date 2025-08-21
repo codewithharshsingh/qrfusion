@@ -1046,3 +1046,8 @@ RESPONSIVE STYLES
   color: var(--text-secondary);
   opacity: 0.25;
 }
+
+.flatpickr-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8; /* adjust to match your design */
+}

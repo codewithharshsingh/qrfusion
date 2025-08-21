@@ -49,12 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event Start
   flatpickr("#event-start", {
     enableTime: true,
-    dateFormat: "Y-m-d H:i", // actual value format (for QR code)
-    altInput: true, // create a user-friendly field
-    altFormat: "F j, Y h:i K", // display format (e.g., August 21, 2025 08:58 PM)
+    dateFormat: "Y-m-d H:i", // actual value
+    altInput: true, // use custom input
+    altFormat: "F j, Y h:i K", // user-friendly format
     allowInput: true,
+    defaultDate: null,
     onReady: (selectedDates, dateStr, instance) => {
-      instance.altInput.setAttribute("placeholder", "Select Start Date & Time");
+      if (instance.altInput) {
+        instance.altInput.placeholder = "Select Start Date & Time"; // force placeholder
+      }
     },
   });
 
@@ -65,8 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
     altInput: true,
     altFormat: "F j, Y h:i K",
     allowInput: true,
+    defaultDate: null,
     onReady: (selectedDates, dateStr, instance) => {
-      instance.altInput.setAttribute("placeholder", "Select End Date & Time");
+      if (instance.altInput) {
+        instance.altInput.placeholder = "Select End Date & Time";
+      }
     },
   });
 
