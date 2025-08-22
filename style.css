@@ -771,7 +771,8 @@ RESPONSIVE STYLES
     padding: 6rem 1.5rem 1.5rem 1.5rem;
   }
 
-  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  .date-picker-wrapper
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     display: none;
   }
 }
