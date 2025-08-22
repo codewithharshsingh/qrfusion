@@ -51,7 +51,7 @@ body {
   line-height: 1.6;
   background: linear-gradient(135deg, #e6f0ff 0%, #fde2e6 100%);
   background-attachment: fixed;
-  transition: background 0.3s, color 0.3s;
+  transition: 0.3s;
 }
 
 /* === DARK THEME OVERRIDES === */
