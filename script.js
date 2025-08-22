@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentTab = "text";
   let logoImage = null;
+  let emailValidationTimeout;
   const PREVIEW_SIZE = 240;
 
   const qrCodeInstance = new QRCodeStyling({
@@ -101,6 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById(id);
     if (el) el.value = value || "";
   };
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   const fetchAddressFromPincode = async (pincode, prefix) => {
     const statusEl = document.getElementById(`${prefix}-address-status`);
@@ -267,6 +273,10 @@ END:VCALENDAR`;
       }
       case "email": {
         const to = getInputValue("email-to");
+        // If the email is not empty AND it's invalid, return nothing.
+        if (to && !isValidEmail(to)) {
+          return "";
+        }
         if (!to) return "";
         return `mailto:${to}?subject=${encodeURIComponent(
           getInputValue("email-subject")
@@ -360,6 +370,35 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
   // --- QR Update ---
   const updateQRCode = () => {
+    // --- PASTE THIS NEW CODE IN ITS PLACE ---
+    clearTimeout(emailValidationTimeout); // Clear any pending auto-hide timer
+
+    if (currentTab === "email") {
+      const emailInput = document.getElementById("email-to");
+      const emailError = document.getElementById("email-error-message");
+      const emailValue = emailInput.value.trim();
+
+      // Determine the message and style based on the input
+      if (emailValue && !isValidEmail(emailValue)) {
+        emailError.textContent = "Please enter a valid email address.";
+        emailError.className = "error-message"; // Style as an error
+      } else if (emailValue && isValidEmail(emailValue)) {
+        emailError.textContent = "Email format is valid.";
+        emailError.className = "status-text success"; // Style as success
+      } else {
+        emailError.textContent = ""; // No message if empty
+      }
+
+      // If a message was displayed (either error or success), set a timer to clear it
+      if (emailError.textContent) {
+        emailValidationTimeout = setTimeout(() => {
+          emailError.textContent = "";
+          emailError.className = "error-message"; // Reset class for the next check
+        }, 5000); // Hide after 5 seconds
+      }
+    }
+    // --- END OF NEW CODE ---
+
     const qrData = generateQRData();
     const hasData = !!qrData.trim();
     showQRCode(hasData);

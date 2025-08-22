@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A free, advanced online tool to create custom QR codes for URLs, contact info, Wi-Fi, events, and more. Customize colors, shapes, and add your own logo."
+    />
     <title>QR Fusion - Free & Advanced QR Code Generator Online</title>
     <link
       rel="stylesheet"
@@ -86,16 +90,28 @@
           <section class="options-section">
             <h2 class="section-title">Options</h2>
             <div class="tabs-container">
-              <button class="tab tab-active" data-tab="text">Text/URL</button>
-              <button class="tab" data-tab="vcard">Contact</button>
-              <button class="tab" data-tab="wifi">Wi-Fi</button>
-              <button class="tab" data-tab="event">Event</button>
-              <button class="tab" data-tab="social">Social</button>
-              <button class="tab" data-tab="appstore">App Store</button>
-              <button class="tab" data-tab="email">Email</button>
-              <button class="tab" data-tab="sms">SMS</button>
-              <button class="tab" data-tab="location">Location</button>
-              <button class="tab" data-tab="payment">Payment</button>
+              <button class="tab tab-active lift-on-hover" data-tab="text">
+                Text/URL
+              </button>
+              <button class="tab lift-on-hover" data-tab="vcard">
+                Contact
+              </button>
+              <button class="tab lift-on-hover" data-tab="wifi">Wi-Fi</button>
+              <button class="tab lift-on-hover" data-tab="event">Event</button>
+              <button class="tab lift-on-hover" data-tab="social">
+                Social
+              </button>
+              <button class="tab lift-on-hover" data-tab="appstore">
+                App Store
+              </button>
+              <button class="tab lift-on-hover" data-tab="email">Email</button>
+              <button class="tab lift-on-hover" data-tab="sms">SMS</button>
+              <button class="tab lift-on-hover" data-tab="location">
+                Location
+              </button>
+              <button class="tab lift-on-hover" data-tab="payment">
+                Payment
+              </button>
             </div>
           </section>
 
@@ -160,7 +176,10 @@
                 <label for="logo-upload">Add Logo</label>
                 <div class="logo-upload-wrapper">
                   <input type="file" id="logo-upload" />
-                  <button class="remove-logo-btn" id="remove-logo-btn">
+                  <button
+                    class="remove-logo-btn lift-on-hover"
+                    id="remove-logo-btn"
+                  >
                     Remove
                   </button>
                 </div>
@@ -198,19 +217,35 @@
             <div class="control-group">
               <p class="export-label">Download As</p>
               <div class="download-buttons-group">
-                <button id="download-png-btn" class="export-button" disabled>
+                <button
+                  id="download-png-btn"
+                  class="export-button lift-on-hover"
+                  disabled
+                >
                   PNG
                 </button>
-                <button id="download-jpeg-btn" class="export-button" disabled>
+                <button
+                  id="download-jpeg-btn"
+                  class="export-button lift-on-hover"
+                  disabled
+                >
                   JPEG
                 </button>
-                <button id="download-pdf-btn" class="export-button" disabled>
+                <button
+                  id="download-pdf-btn"
+                  class="export-button lift-on-hover"
+                  disabled
+                >
                   PDF
                 </button>
               </div>
             </div>
             <div class="control-group">
-              <button id="download-all-btn" class="export-button" disabled>
+              <button
+                id="download-all-btn"
+                class="export-button lift-on-hover"
+                disabled
+              >
                 <i class="fa-solid fa-download"></i>
                 Download All (.zip)
               </button>
@@ -364,6 +399,11 @@
           placeholder="Recipient Email"
           class="grid-col-span-2"
         />
+        <div
+          id="email-error-message"
+          class="error-message grid-col-span-2"
+        ></div>
+
         <input
           type="text"
           id="email-subject"

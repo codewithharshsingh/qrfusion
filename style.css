@@ -271,12 +271,6 @@ body.dark-theme .tab {
 .tab:hover {
   background-color: var(--secondary-button-bg-hover);
   border-color: var(--text-secondary);
-  transform: translateY(-2px);
-  box-shadow: var(--export-button-shadow-hover);
-  filter: brightness(1.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.1);
 }
 
 body.dark-theme .tab:hover {
@@ -598,15 +592,6 @@ input[type="color"]::-moz-color-swatch {
   transition: all 0.2s ease-in-out;
 }
 
-.remove-logo-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--export-button-shadow-hover);
-  filter: brightness(1.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.1);
-}
-
 body.dark-theme .remove-logo-btn:hover {
   color: var(--text-primary);
   border-color: var(--accent-primary);
@@ -718,15 +703,6 @@ body.dark-theme .remove-logo-btn:hover {
   box-shadow: var(--export-button-shadow);
 }
 
-.export-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--export-button-shadow-hover);
-  filter: brightness(1.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.1);
-}
-
 /* --- Utility & New Features --- */
 .section-header {
   display: flex;
@@ -771,6 +747,10 @@ body.dark-theme .remove-logo-btn:hover {
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   color: var(--error-color);
+}
+
+.error-message:empty {
+  display: none;
 }
 
 /* ==============================================
@@ -1016,4 +996,10 @@ input[type="datetime-local"]::-webkit-datetime-edit-minute-field,
 input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
   color: var(--text-secondary); /* match your placeholder color */
   opacity: 0.9;
+}
+
+.lift-on-hover:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--export-button-shadow-hover);
+  filter: brightness(1.1);
 }
