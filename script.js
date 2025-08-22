@@ -366,31 +366,41 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
   // --- QR Update ---
   const updateQRCode = () => {
-    // --- PASTE THIS NEW CODE IN ITS PLACE ---
     clearTimeout(emailValidationTimeout); // Clear any pending auto-hide timer
 
-    if (currentTab === "email") {
-      const emailInput = document.getElementById("email-to");
-      const emailError = document.getElementById("email-error-message");
-      const emailValue = emailInput.value.trim();
+    // Check if the current tab is one that needs email validation
+    if (currentTab === "email" || currentTab === "vcard") {
+      // Determine which elements to use based on the active tab
+      const isVCardTab = currentTab === "vcard";
+      const emailInputId = isVCardTab ? "vcard-email" : "email-to";
+      const emailErrorId = isVCardTab
+        ? "vcard-email-status"
+        : "email-error-message";
 
-      // Determine the message and style based on the input
-      if (emailValue && !isValidEmail(emailValue)) {
-        emailError.textContent = "Please enter a valid email address.";
-        emailError.className = "error-message"; // Style as an error
-      } else if (emailValue && isValidEmail(emailValue)) {
-        emailError.textContent = "Email format is valid.";
-        emailError.className = "status-text success"; // Style as success
-      } else {
-        emailError.textContent = ""; // No message if empty
-      }
+      const emailInput = document.getElementById(emailInputId);
+      const emailError = document.getElementById(emailErrorId);
 
-      // If a message was displayed (either error or success), set a timer to clear it
-      if (emailError.textContent) {
-        emailValidationTimeout = setTimeout(() => {
+      // Make sure the elements exist before proceeding
+      if (emailInput && emailError) {
+        const emailValue = emailInput.value.trim();
+
+        // The validation logic is the same, but now uses the correct elements
+        if (emailValue && !isValidEmail(emailValue)) {
+          emailError.textContent = "Please enter a valid email address.";
+          emailError.className = "error-message";
+        } else if (emailValue && isValidEmail(emailValue)) {
+          emailError.textContent = "Email format is valid.";
+          emailError.className = "status-text success";
+        } else {
           emailError.textContent = "";
-          emailError.className = "error-message"; // Reset class for the next check
-        }, 5000); // Hide after 5 seconds
+        }
+
+        if (emailError.textContent) {
+          emailValidationTimeout = setTimeout(() => {
+            emailError.textContent = "";
+            emailError.className = "error-message";
+          }, 5000);
+        }
       }
     }
     // --- END OF NEW CODE ---
