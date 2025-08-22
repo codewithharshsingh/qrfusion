@@ -775,6 +775,18 @@ RESPONSIVE STYLES
     input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     display: none;
   }
+
+  /* Hide the dropdown arrow/calendar icon in datetime-local */
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  input[type="datetime-local"]::-webkit-inner-spin-button,
+  input[type="datetime-local"]::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+  }
 }
 
 /* --- MOBILE DEVICES (<= 600px) --- */
