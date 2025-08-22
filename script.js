@@ -243,16 +243,22 @@ END:VCALENDAR`;
       }
 
       case "social": {
-        const handle = getInputValue("social-handle");
+        let handle = getInputValue("social-handle");
         if (!handle) return "";
         const platform = getInputValue("social-platform");
+
+        // Remove the '@' if the user types it, to prevent duplicates
+        if (handle.startsWith("@")) {
+          handle = handle.substring(1);
+        }
+
         const urls = {
           twitter: `https://twitter.com/${handle}`,
           instagram: `https://instagram.com/${handle}`,
           facebook: `https://facebook.com/${handle}`,
           linkedin: `https://linkedin.com/in/${handle}`,
           tiktok: `https://tiktok.com/@${handle}`,
-          youtube: `https://youtube.com/${handle}`,
+          youtube: `https://youtube.com/@${handle}`, // The '@' is now added here
           pinterest: `https://pinterest.com/${handle}`,
         };
         return urls[platform] || "";
