@@ -124,13 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (Array.isArray(data) && data[0]?.Status === "Success") {
         const po = data[0].PostOffice[0];
 
-        // VCard uses "area", Location uses "street"
-        if (prefix === "loc") {
-          setInputValue(`${prefix}-street`, po.Name);
-        } else {
-          setInputValue(`${prefix}-area`, po.Name);
-        }
-
+        setInputValue(`${prefix}-area`, po.Name);
         setInputValue(`${prefix}-city`, po.District);
         setInputValue(`${prefix}-state`, po.State);
         setInputValue(`${prefix}-country`, po.Country);
