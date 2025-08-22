@@ -770,6 +770,10 @@ RESPONSIVE STYLES
   body {
     padding: 6rem 1.5rem 1.5rem 1.5rem;
   }
+
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
 /* --- MOBILE DEVICES (<= 600px) --- */
@@ -818,6 +822,10 @@ RESPONSIVE STYLES
   .download-buttons-group {
     grid-template-columns: 1fr;
   }
+
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
 /* --- EXTRA SMALL MOBILE DEVICES (<= 400px) --- */
@@ -861,6 +869,10 @@ RESPONSIVE STYLES
 
   .tab {
     padding: 0.4rem 1rem; /* Adjust tab padding */
+  }
+
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
   }
 }
 
