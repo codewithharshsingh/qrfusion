@@ -87,11 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTheme(newTheme);
   });
 
-  const savedTheme =
-    localStorage.getItem("theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
+  const savedTheme = localStorage.getItem("theme") || "light";
   applyTheme(savedTheme);
   themeToggle.checked = savedTheme === "dark";
 
