@@ -366,11 +366,9 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
 
   // --- QR Update ---
   const updateQRCode = () => {
-    clearTimeout(emailValidationTimeout); // Clear any pending auto-hide timer
+    clearTimeout(emailValidationTimeout);
 
-    // Check if the current tab is one that needs email validation
     if (currentTab === "email" || currentTab === "vcard") {
-      // Determine which elements to use based on the active tab
       const isVCardTab = currentTab === "vcard";
       const emailInputId = isVCardTab ? "vcard-email" : "email-to";
       const emailErrorId = isVCardTab
@@ -380,26 +378,26 @@ IFSC/SWIFT: ${getInputValue("bank-ifsc")}`;
       const emailInput = document.getElementById(emailInputId);
       const emailError = document.getElementById(emailErrorId);
 
-      // Make sure the elements exist before proceeding
       if (emailInput && emailError) {
         const emailValue = emailInput.value.trim();
 
-        // The validation logic is the same, but now uses the correct elements
         if (emailValue && !isValidEmail(emailValue)) {
+          // Set the error message, but DO NOT start a timer
           emailError.textContent = "Please enter a valid email address.";
           emailError.className = "error-message";
         } else if (emailValue && isValidEmail(emailValue)) {
+          // Set the success message
           emailError.textContent = "Email format is valid.";
           emailError.className = "status-text success";
-        } else {
-          emailError.textContent = "";
-        }
 
-        if (emailError.textContent) {
+          // ONLY start the auto-hide timer on success
           emailValidationTimeout = setTimeout(() => {
             emailError.textContent = "";
             emailError.className = "error-message";
           }, 5000);
+        } else {
+          // Clear any message if the input is empty
+          emailError.textContent = "";
         }
       }
     }
