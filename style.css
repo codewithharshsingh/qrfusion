@@ -45,13 +45,16 @@
 
 body {
   min-height: 100vh;
-  padding: 7rem 2rem 2rem 2rem;
   font-family: var(--font-family);
   color: var(--text-primary);
   line-height: 1.6;
   background: linear-gradient(135deg, #e6f0ff 0%, #fde2e6 100%);
   background-attachment: fixed;
   transition: 0.3s;
+}
+
+.page-content {
+  padding: 7rem 2rem 2rem 2rem;
 }
 
 /* === DARK THEME OVERRIDES === */
@@ -766,7 +769,7 @@ RESPONSIVE STYLES
   .main-container {
     padding: 2rem;
   }
-  body {
+  .page-content {
     padding: 6rem 1.5rem 1.5rem 1.5rem;
   }
 
@@ -791,9 +794,12 @@ RESPONSIVE STYLES
 /* --- MOBILE DEVICES (<= 600px) --- */
 @media (max-width: 600px) {
   body {
-    padding: 5.5rem 1rem 1rem 1rem;
     font-size: 0.95rem; /* Slightly smaller base font */
     background-attachment: scroll; /* Fix for mobile keyboard issue */
+  }
+
+  .page-content {
+    padding: 5.5rem 1rem 1rem 1rem;
   }
 
   .app-header {
@@ -839,8 +845,11 @@ RESPONSIVE STYLES
 /* --- EXTRA SMALL MOBILE DEVICES (<= 400px) --- */
 @media (max-width: 400px) {
   body {
-    padding-top: 5rem;
     font-size: 0.9rem; /* Further reduce font size */
+  }
+
+  .page-content {
+    padding-top: 5rem;
   }
 
   .main-container {

@@ -258,7 +258,7 @@ END:VCALENDAR`;
           facebook: `https://facebook.com/${handle}`,
           linkedin: `https://linkedin.com/in/${handle}`,
           tiktok: `https://tiktok.com/@${handle}`,
-          youtube: `https://youtube.com/@${handle}`, // The '@' is now added here
+          youtube: `https://youtube.com/@${handle}`,
           pinterest: `https://pinterest.com/${handle}`,
         };
         return urls[platform] || "";
